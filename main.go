@@ -16,7 +16,7 @@ func main() {
 	port := os.Getenv("port")
 	fmt.Printf("Running on port: %v", port)
 
-	err := http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe(":"+port, nil)
 	if err != nil {
 		fmt.Println("Problem in ListenAndServe", err)
 	}
