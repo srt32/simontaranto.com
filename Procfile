@@ -1,1 +1,1 @@
-web: simontaranto.com -port=$PORT
+web: port=$PORT simontaranto.com
