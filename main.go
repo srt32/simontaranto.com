@@ -23,18 +23,13 @@ func main() {
 }
 
 func redirectHandler(w http.ResponseWriter, r *http.Request) {
-	var redirectedPath string
-	requestedPath := r.URL.Path
+	redirectedURL := defaultRedirectPath
 
-	rawRedirectedPath := urlMap()[requestedPath]
-
-	if rawRedirectedPath == "" {
-		redirectedPath = defaultRedirectPath
-	} else {
-		redirectedPath = defaultRedirectPath + rawRedirectedPath
+	if path, ok := urlMap()[r.URL.Path]; ok {
+		redirectedURL += path
 	}
 
-	http.Redirect(w, r, redirectedPath, 301)
+	http.Redirect(w, r, redirectedURL, 301)
 }
 
 func urlMap() map[string]string {
