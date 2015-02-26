@@ -19,7 +19,7 @@ func TestUnknownURLRedirect(t *testing.T) {
 
 	handler.ServeHTTP(w, req)
 	if w.Code != 301 {
-		t.Errorf("Response was not 201, was: %v", w.Code)
+		t.Errorf("Response was not 301, was: %v", w.Code)
 	}
 
 	//if w.Path != expectedURL {
