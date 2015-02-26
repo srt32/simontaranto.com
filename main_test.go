@@ -9,13 +9,20 @@ import (
 
 func TestUnknownURLRedirect(t *testing.T) {
 	requestedURL := "http://simontaranto.com/nonsense"
-	expectedURL := "http://simontaranto.com"
+	//expectedURL := "http://simontaranto.com"
 
-	handler := RedirectHandler
+	handler := http.HandlerFunc(RedirectHandler)
 	w := httptest.NewRecorder()
 
 	req, err := http.NewRequest("GET", requestedURL, nil)
 	assert.Nil(t, err)
 
 	handler.ServeHTTP(w, req)
+	if w.Code != 301 {
+		t.Errorf("Response was not 201, was: %v", w.Code)
+	}
+
+	//if w.Path != expectedURL {
+	//	t.Errorf("Redirected URL was not %v, was: %v", expectedURL, w.Path)
+	//}
 }
