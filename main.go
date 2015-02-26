@@ -11,7 +11,7 @@ const (
 )
 
 func main() {
-	http.HandleFunc("/", redirectHandler)
+	http.HandleFunc("/", RedirectHandler)
 
 	port := os.Getenv("port")
 	fmt.Printf("Running on port: %v", port)
@@ -22,7 +22,7 @@ func main() {
 	}
 }
 
-func redirectHandler(w http.ResponseWriter, r *http.Request) {
+func RedirectHandler(w http.ResponseWriter, r *http.Request) {
 	redirectedURL := defaultRedirectPath
 
 	if path, ok := urlMap()[r.URL.Path]; ok {
