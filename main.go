@@ -8,6 +8,7 @@ import (
 
 const (
 	defaultRedirectPath = "http://blog.simontaranto.com"
+	referrerString = "utm_source=simontaranto_legacy_blog"
 )
 
 func main() {
@@ -32,8 +33,14 @@ func RedirectHandler(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, redirectedURL, 301)
 }
 
+func appendReferrer (url string) (string) {
+    referred_url := url + "?"
+    referred_url = referred_url + referrerString
+    return referred_url
+}
+
 func urlMap() map[string]string {
-	return map[string]string{
+	legacyMapping := map[string]string{
 		"/2015/01/11/datetime-parsing-with-go.html":                                    "/post/2015-01-11-datetime-parsing-with-go.html",
 		"/2014/11/23/speed-up-javascript-capybara-specs-by-blacklisting-urls.html":     "/post/2014-11-23-speed-up-javascript-capybara-specs-by-blacklisting-urls.html/",
 		"/2014/09/16/postgres-window-functions.html":                                   "/post/2014-09-16-postgres-window-functions.html/",
@@ -66,4 +73,11 @@ func urlMap() map[string]string {
 		"/2013/09/18/ruby-enumerable-is-amazing.html":                                  "/post/2013-09-18-ruby-enumerable-is-amazing.html/",
 		"/2013/09/13/gschool-week-0.html":                                              "/post/2013-09-13-gschool-week-0.html/",
 	}
+
+	for legacyUrl, _ := range legacyMapping {
+		referredUrl := appendReferrer(legacyMapping[legacyUrl])
+		legacyMapping[legacyUrl] = referredUrl
+        }
+
+	return legacyMapping
 }

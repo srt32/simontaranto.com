@@ -30,8 +30,8 @@ func TestUnknownURLRedirect(t *testing.T) {
 }
 
 func TestKnownURLRedirect(t *testing.T) {
-	requestedURL := "http://simontaranto.com/2015/01/11/datetime-parsing-with-go.html"
-	expectedURL := "http://blog.simontaranto.com/post/2015-01-11-datetime-parsing-with-go.html"
+	requestedURL := "http://simontaranto.com/2015/01/11/datetime-parsing-with-go.html?foo=bar"
+	expectedURL := "http://blog.simontaranto.com/post/2015-01-11-datetime-parsing-with-go.html?utm_source=simontaranto_legacy_blog"
 
 	handler := http.HandlerFunc(RedirectHandler)
 	w := httptest.NewRecorder()
