@@ -29,8 +29,8 @@ func RedirectHandler(w http.ResponseWriter, r *http.Request) {
 		redirectedURL += path
 	}
 
-        w.Header().Set("Referer", "simontaranto.com")	
-        w.Header().Set("Referrer", "simontaranto.com")	
+	w.Header().Set("Referer", "simontaranto.com")
+	w.Header().Set("Referrer", "simontaranto.com")
 
 	http.Redirect(w, r, redirectedURL, 301)
 }
